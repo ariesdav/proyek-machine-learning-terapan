@@ -9,5 +9,5 @@ Berdasarkan laporan International Data Corporation [IDC](https://www.idc.com/get
 ### Problem Statements 
 Mengacu pada penjelasan dari latar belakang, muncul beberapa permasalahan yang memengaruhi proyek ini:
 - Fitur atau komponen apa saja yang paling berpengaruh terhadap harga sebuah laptop?
-- Bagaimana perusahaan dapat memprediksi harga laptop dengan akurat?
+- Bagaimana perusahaan dapat memprediksi harga laptop lebih akurat?
 ### Goals
