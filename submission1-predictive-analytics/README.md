@@ -15,10 +15,13 @@ Untuk mencapai tujuan proyek, beberapa hal yang harus dicapai adalah:
 - Menjelaskan fitur atau komponen utama yang paling berpengaruh terhadap harga laptop.
 - Membangun model prediksi harga laptop yang akurat dengan berbagai teknik pembelajaran mesin.
 ### Solution Statement
-Selain dari tujuan proyek, tentu diperlukan solusi agar proyek ini dapat berhasil. Beberapa solusi di antaranya adalah:
+Selain dari tujuan proyek, tentu diperlukan solusi agar proyek ini dapat berhasil. Beberapa solusi diantaranya adalah:
 - Melakukan analisis eksplorasi data untuk memahami korelasi antara fitur-fitur laptop dan harga.  
 - Menerapkan model pembelajaran mesin untuk meningkatkan akurasi prediksi harga, termasuk:  
   - Support Vector Regression (SVR): Model regresi berbasis Support Vector Machine (SVM) yang mencari fungsi terbaik untuk memprediksi nilai output kontinu.  
   - K-Nearest Neighbors Regression (KNN): Metode non-parametrik yang memprediksi nilai berdasarkan rata-rata dari K tetangga terdekat.  
   - Random Forest Regression: Algoritma ensemble yang menggabungkan banyak decision tree untuk prediksi yang lebih stabil dan akurat.  
-- Mengevaluasi performa model menggunakan metrik seperti Mean Squared Error (MSE), Mean Absolute Error (MAE), Root Mean Squared Error (RMSE), dan R-Squared (R²).  
+- Mengevaluasi performa model menggunakan metrik seperti Mean Squared Error (MSE), Mean Absolute Error (MAE), Root Mean Squared Error (RMSE), dan R-Squared (R²).
+
+## Data Understanding
+Setelah mengetahui permasalahan bisnis, pemilihan data juga penting yang menyesuaikan permasalahan proyek ini. Data yang digunakan adal
