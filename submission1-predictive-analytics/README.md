@@ -24,4 +24,4 @@ Selain dari tujuan proyek, tentu diperlukan solusi agar proyek ini dapat berhasi
 - Mengevaluasi performa model menggunakan metrik seperti Mean Squared Error (MSE), Mean Absolute Error (MAE), Root Mean Squared Error (RMSE), dan R-Squared (R²).
 
 ## Data Understanding
-Setelah mengetahui permasalahan bisnis, pemilihan data juga penting yang menyesuaikan permasalahan proyek ini. Data yang digunakan adal
+Data
