@@ -23,17 +23,31 @@ Selain dari tujuan proyek, tentu diperlukan solusi agar proyek ini dapat berhasi
   - Random Forest Regression: Algoritma ensemble yang menggabungkan banyak decision tree untuk prediksi yang lebih stabil dan akurat.  
 - Mengevaluasi performa model menggunakan metrik seperti Mean Squared Error (MSE), Mean Absolute Error (MAE), Root Mean Squared Error (RMSE), dan R-Squared (R²).
 
-## Data Understanding
+## Data Understanding 
 ## Pemahaman Data  
-Dataset yang digunakan dalam proyek ini adalah [Laptops Price Dataset](https://www.kaggle.com/datasets/juanmerinobermejo/laptops-price-dataset). Dataset ini berisi kumpulan informasi mengenai berbagai jenis laptop, memungkinkan analisis mendalam terkait spesifikasi dan harganya. Data mencakup berbagai merek, model, serta konfigurasi laptop yang beragam.  
+Dataset yang digunakan dalam proyek ini adalah [Laptop Prices](https://www.kaggle.com/datasets/owm4096/laptop-prices), yang bersumber dari Kaggle. Dataset ini memiliki ukuran **1275 baris × 23 kolom**, di mana setiap kolom mewakili fitur tertentu dari laptop. Dataset ini merupakan versi yang telah diproses ulang dari dataset harga laptop yang terkenal.  
 
-Beberapa fitur utama dalam dataset ini meliputi:  
-- Laptop Name: Identitas unik atau model dari masing-masing laptop.
-- Status: Status laptop termasuk kategori baru atau bekas.
-- Brand: Merek laptop yang tersedia dalam dataset.  
-- Model: Model spesifik dari setiap merek laptop.  
-- CPU (Central Processing Unit): Informasi mengenai prosesor, termasuk merek, model, dan spesifikasi terkait.  
-- GPU (Graphics Processing Unit): Detail tentang kartu grafis yang digunakan, termasuk merek dan modelnya.  
-- RAM (Random Access Memory): Kapasitas memori yang tersedia untuk menjalankan berbagai tugas secara bersamaan.  
-- Storage: Jenis penyimpanan yang digunakan (HDD atau SSD) beserta kapasitasnya.  
-- Final Price: Harga laptop dalam mata uang yang digunakan dalam dataset.  
+Berikut adalah fitur lengkap dalam dataset ini:
+- Company: Produsen atau merek laptop.  
+- Product: Nama merek dan model laptop.  
+- TypeName: Jenis laptop (Notebook, Ultrabook, Gaming, dll.).  
+- Inches: Ukuran layar dalam inci.  
+- Ram: Kapasitas RAM dalam GB.  
+- OS: Sistem operasi yang terpasang pada laptop.  
+- Weight: Berat laptop dalam kilogram.  
+- Price_euros: Harga laptop dalam Euro (target prediksi).  
+- Screen: Resolusi layar (Standard, Full HD, 4K Ultra HD, Quad HD+).  
+- ScreenW: Lebar layar dalam piksel.  
+- ScreenH: Tinggi layar dalam piksel.  
+- Touchscreen: Apakah laptop memiliki layar sentuh atau tidak.  
+- IPSpanel: Apakah layar laptop menggunakan panel IPS atau tidak.  
+- RetinaDisplay: Apakah layar laptop memiliki Retina Display atau tidak.  
+- CPU_company: Produsen prosesor laptop.  
+- CPU_freq: Kecepatan prosesor laptop dalam Hz.  
+- CPU_model: Model prosesor yang digunakan.  
+- PrimaryStorage: Kapasitas penyimpanan utama dalam GB.  
+- PrimaryStorageType: Jenis penyimpanan utama (HDD, SSD, Flash Storage, Hybrid).  
+- SecondaryStorage: Kapasitas penyimpanan tambahan jika tersedia (GB).  
+- SecondaryStorageType: Jenis penyimpanan tambahan (HDD, SSD, Hybrid, atau Tidak Ada).  
+- GPU_company: Produsen kartu grafis.  
+- GPU_model: Model kartu grafis yang digunakan.  
