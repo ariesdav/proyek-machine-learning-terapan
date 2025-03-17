@@ -24,4 +24,16 @@ Selain dari tujuan proyek, tentu diperlukan solusi agar proyek ini dapat berhasi
 - Mengevaluasi performa model menggunakan metrik seperti Mean Squared Error (MSE), Mean Absolute Error (MAE), Root Mean Squared Error (RMSE), dan R-Squared (R²).
 
 ## Data Understanding
-Data
+## Pemahaman Data  
+Dataset yang digunakan dalam proyek ini adalah [Laptops Price Dataset](https://www.kaggle.com/datasets/juanmerinobermejo/laptops-price-dataset). Dataset ini berisi kumpulan informasi mengenai berbagai jenis laptop, memungkinkan analisis mendalam terkait spesifikasi dan harganya. Data mencakup berbagai merek, model, serta konfigurasi laptop yang beragam.  
+
+Beberapa fitur utama dalam dataset ini meliputi:  
+- Laptop Name: Identitas unik atau model dari masing-masing laptop.
+- Status: Status laptop termasuk kategori baru atau bekas.
+- Brand: Merek laptop yang tersedia dalam dataset.  
+- Model: Model spesifik dari setiap merek laptop.  
+- CPU (Central Processing Unit): Informasi mengenai prosesor, termasuk merek, model, dan spesifikasi terkait.  
+- GPU (Graphics Processing Unit): Detail tentang kartu grafis yang digunakan, termasuk merek dan modelnya.  
+- RAM (Random Access Memory): Kapasitas memori yang tersedia untuk menjalankan berbagai tugas secara bersamaan.  
+- Storage: Jenis penyimpanan yang digunakan (HDD atau SSD) beserta kapasitasnya.  
+- Final Price: Harga laptop dalam mata uang yang digunakan dalam dataset.  
