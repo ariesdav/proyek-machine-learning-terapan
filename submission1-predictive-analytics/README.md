@@ -23,8 +23,7 @@ Selain dari tujuan proyek, tentu diperlukan solusi agar proyek ini dapat berhasi
   - Random Forest Regression: Algoritma ensemble yang menggabungkan banyak decision tree untuk prediksi yang lebih stabil dan akurat.  
 - Mengevaluasi performa model menggunakan metrik seperti Mean Squared Error (MSE), Mean Absolute Error (MAE), Root Mean Squared Error (RMSE), dan R-Squared (R²).
 
-## Data Understanding 
-## Pemahaman Data  
+## Data Understanding
 Dataset yang digunakan dalam proyek ini adalah [Laptop Prices](https://www.kaggle.com/datasets/owm4096/laptop-prices), yang bersumber dari Kaggle. Dataset ini memiliki ukuran **1275 baris × 23 kolom**, di mana setiap kolom mewakili fitur tertentu dari laptop. Dataset ini merupakan versi yang telah diproses ulang dari dataset harga laptop yang terkenal.  
 
 Berikut adalah fitur lengkap dalam dataset ini:
