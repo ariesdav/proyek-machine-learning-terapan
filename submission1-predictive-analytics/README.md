@@ -24,29 +24,34 @@ Selain dari tujuan proyek, tentu diperlukan solusi agar proyek ini dapat berhasi
 - Mengevaluasi performa model menggunakan metrik seperti Mean Squared Error (MSE), Mean Absolute Error (MAE), Root Mean Squared Error (RMSE), dan R-Squared (R²).
 
 ## Data Understanding
-Dataset yang digunakan dalam proyek ini adalah [Laptop Prices](https://www.kaggle.com/datasets/owm4096/laptop-prices), yang bersumber dari Kaggle. Dataset ini memiliki ukuran **1275 baris × 23 kolom**, di mana setiap kolom mewakili fitur tertentu dari laptop. Dataset ini merupakan versi yang telah diproses ulang dari dataset harga laptop yang terkenal.  
+Proyek ini menggunakan dataset [Laptop Prices](https://www.kaggle.com/datasets/owm4096/laptop-prices) yang diperoleh dari Kaggle. Dataset ini berisi **1275 baris × 23 kolom**, dengan setiap kolom merepresentasikan berbagai fitur laptop, seperti Name Product, RAM, Touch Screen, CPU, dan lainnya. Fitur utama yang menjadi target analisis adalah **Price_euros**, yang menunjukkan harga laptop dalam Euro. Dataset ini merupakan versi yang telah diproses ulang dari kumpulan data harga laptop yang populer.
 
-Berikut adalah fitur lengkap dalam dataset ini:
-- Company: Produsen atau merek laptop.  
-- Product: Nama merek dan model laptop.  
-- TypeName: Jenis laptop (Notebook, Ultrabook, Gaming, dll.).  
-- Inches: Ukuran layar dalam inci.  
-- Ram: Kapasitas RAM dalam GB.  
-- OS: Sistem operasi yang terpasang pada laptop.  
-- Weight: Berat laptop dalam kilogram.  
-- Price_euros: Harga laptop dalam Euro (target prediksi).  
-- Screen: Resolusi layar (Standard, Full HD, 4K Ultra HD, Quad HD+).  
-- ScreenW: Lebar layar dalam piksel.  
-- ScreenH: Tinggi layar dalam piksel.  
-- Touchscreen: Apakah laptop memiliki layar sentuh atau tidak.  
-- IPSpanel: Apakah layar laptop menggunakan panel IPS atau tidak.  
-- RetinaDisplay: Apakah layar laptop memiliki Retina Display atau tidak.  
-- CPU_company: Produsen prosesor laptop.  
-- CPU_freq: Kecepatan prosesor laptop dalam Hz.  
-- CPU_model: Model prosesor yang digunakan.  
-- PrimaryStorage: Kapasitas penyimpanan utama dalam GB.  
-- PrimaryStorageType: Jenis penyimpanan utama (HDD, SSD, Flash Storage, Hybrid).  
-- SecondaryStorage: Kapasitas penyimpanan tambahan jika tersedia (GB).  
-- SecondaryStorageType: Jenis penyimpanan tambahan (HDD, SSD, Hybrid, atau Tidak Ada).  
-- GPU_company: Produsen kartu grafis.  
-- GPU_model: Model kartu grafis yang digunakan.  
+Berikut adalah tabel yang merangkum fitur-fitur dalam dataset:  
+
+| Fitur                 | Deskripsi |
+|----------------------|-----------|
+| Company           | Produsen atau merek laptop. |
+| Product           | Nama merek dan model laptop. |
+| TypeName          | Jenis laptop (Notebook, Ultrabook, Gaming, dll.). |
+| Inches           | Ukuran layar dalam inci. |
+| Ram              | Kapasitas RAM dalam GB. |
+| OS               | Sistem operasi yang terpasang pada laptop. |
+| Weight           | Berat laptop dalam kilogram. |
+| Price_euros      | Harga laptop dalam Euro (target prediksi). |
+| Screen           | Resolusi layar (Standard, Full HD, 4K Ultra HD, Quad HD+). |
+| ScreenW          | Lebar layar dalam piksel. |
+| ScreenH          | Tinggi layar dalam piksel. |
+| Touchscreen      | Apakah laptop memiliki layar sentuh atau tidak. |
+| IPSpanel         | Apakah layar laptop menggunakan panel IPS atau tidak. |
+| RetinaDisplay    | Apakah layar laptop memiliki Retina Display atau tidak. |
+| CPU_company      | Produsen prosesor laptop. |
+| CPU_freq         | Kecepatan prosesor laptop dalam Hz. |
+| CPU_model        | Model prosesor yang digunakan. |
+| PrimaryStorage   | Kapasitas penyimpanan utama dalam GB. |
+| PrimaryStorageType | Jenis penyimpanan utama (HDD, SSD, Flash Storage, Hybrid). |
+| SecondaryStorage | Kapasitas penyimpanan tambahan jika tersedia (GB). |
+| SecondaryStorageType | Jenis penyimpanan tambahan (HDD, SSD, Hybrid, atau Tidak Ada). |
+| GPU_company      | Produsen kartu grafis. |
+| GPU_model        | Model kartu grafis yang digunakan. |
+
+
