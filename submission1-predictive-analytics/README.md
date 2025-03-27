@@ -54,4 +54,6 @@ Berikut adalah tabel yang merangkum fitur-fitur dalam dataset:
 | GPU_company      | Produsen kartu grafis. |
 | GPU_model        | Model kartu grafis yang digunakan. |
 
-
+### Exploratory Data Analysis (EDA)
+Tahap awal pada EDA adalah 
+![image](https://github.com/user-attachments/assets/49534fcb-6a74-405b-a300-122f0d1c65e1)
