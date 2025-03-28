@@ -55,5 +55,24 @@ Berikut adalah tabel yang merangkum fitur-fitur dalam dataset:
 | GPU_model        | Model kartu grafis yang digunakan. |
 
 ### Exploratory Data Analysis (EDA)
-Tahap awal pada EDA adalah 
-![image](https://github.com/user-attachments/assets/49534fcb-6a74-405b-a300-122f0d1c65e1)
+Tahapan Exploratory Data Analysis (EDA) merupakan proses penting untuk mengenali struktur dan karakteristik data sebelum melakukan analisis lebih lanjut. Berikut adalah langkah-langkahnya:
+
+1. Memeriksa Struktur Data
+
+  -  Dataset memiliki 1.275 baris, 23 kolom, tipe data numerik dan kategori.
+
+  -  Tidak ada missing value atau duplikasi.
+
+2. Deskripsi Statistik
+
+  -  Variasi besar dalam harga, RAM, berat, dan resolusi layar.
+
+  -  Statistik menunjukkan distribusi dan kemungkinan outlier.
+
+3. Jumlah Kategori Unik
+
+  -  19 merek laptop, 618 model, 791 variasi harga.
+
+  -  Fitur biner: Touchscreen, IPS Panel, Retina Display.
+
+  -  CPU & GPU memiliki banyak variasi, mencerminkan spesifikasi beragam.
