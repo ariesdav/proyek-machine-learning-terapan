@@ -57,43 +57,52 @@ Berikut adalah tabel yang merangkum fitur-fitur dalam dataset:
 ### Exploratory Data Analysis (EDA)
 Tahapan Exploratory Data Analysis (EDA) merupakan proses penting untuk mengenali struktur dan karakteristik data sebelum melakukan analisis lebih lanjut. Berikut adalah langkah-langkahnya:
 
-1. Memeriksa Struktur Data
+#### 1. Memeriksa Struktur Data
   -  Dataset memiliki 1.275 baris, 23 kolom, tipe data numerik dan kategori.
   -  Tidak ada missing value atau duplikasi.
 
-2. Deskripsi Statistik
+#### 2. Deskripsi Statistik
   -  Variasi besar dalam harga, RAM, berat, dan resolusi layar.
   -  Statistik menunjukkan distribusi dan kemungkinan outlier.
 
-3. Jumlah Kategori Unik
+#### 3. Jumlah Kategori Unik
   -  19 merek laptop, 618 model, 791 variasi harga.
   -  Fitur biner: Touchscreen, IPS Panel, Retina Display.
   -  CPU & GPU memiliki banyak variasi, mencerminkan spesifikasi beragam.
 
-4. Analisis Fitur Kategori  
-  - Fitur dengan lebih dari 10 kategori unik (Company, Product, CPU_model, GPU_model):
-    ![Laptop Analysis](submission1-predictive-analytics/gambar/Univariate_Analysis.png)
-    - Merek seperti Dell dan Lenovo mendominasi, sementara Samsung dan Mediacom jarang ditemukan.  
-    - Intel Core i5 7200U dan Core i7 7700HQ paling umum sebagai prosesor utama.  
-    - Sebagian besar laptop menggunakan GPU terintegrasi seperti Intel HD Graphics.  
+#### 4. Univariate Analysis
+A. **Analisis Fitur Kategori**  
+  1. Fitur dengan lebih dari 10 kategori unik (Company, Product, CPU_model, GPU_model):
+      
+      ![Categories_Features_Up_10](https://github.com/ariesdav/proyek-machine-learning-terapan/blob/15ef885bac0ed5fd580e76d56179a608ef4ca95a/submission1-predictive-analytics/gambar/Univariate_Analysis.png)
+  
+      - Merek seperti Dell dan Lenovo mendominasi, sementara Samsung dan Mediacom jarang ditemukan.  
+      - Intel Core i5 7200U dan Core i7 7700HQ paling umum sebagai prosesor utama.  
+      - Sebagian besar laptop menggunakan GPU terintegrasi seperti Intel HD Graphics.  
+  
+  2. Fitur dengan kurang dari 10 kategori unik (TypeName, OS, Screen, dll.):
+     ![Categories_Features_Under_10](https://github.com/ariesdav/proyek-machine-learning-terapan/blob/15ef885bac0ed5fd580e76d56179a608ef4ca95a/submission1-predictive-analytics/gambar/Univariate_Analysis1.png)
+      - Notebook menjadi jenis laptop paling umum dibandingkan Ultrabook dan Gaming Laptop.  
+      - Windows 10 adalah sistem operasi dominan, sementara Android hampir tidak digunakan.  
+      - Mayoritas laptop menggunakan layar Full HD (1920x1080).  
+      - SSD lebih banyak digunakan dibandingkan HDD, sementara penyimpanan sekunder jarang ditemukan.  
+  
+  3. Fitur biner (Ya/Tidak):
+      ![Categories_Features_Binary](https://github.com/ariesdav/proyek-machine-learning-terapan/blob/15ef885bac0ed5fd580e76d56179a608ef4ca95a/submission1-predictive-analytics/gambar/Univariate_Analysis5.png)
+      - Layar sentuh, IPS Panel, dan Retina Display masih jarang ditemukan, hanya ada pada model premium.  
+  
+B. **Analisis Fitur Numerik**  
+  1. Distribusi Histogram:
+     ![Numeric_Features_Histogram](https://github.com/ariesdav/proyek-machine-learning-terapan/blob/15ef885bac0ed5fd580e76d56179a608ef4ca95a/submission1-predictive-analytics/gambar/Univariate_Analysis2.png)
+      - Ukuran layar (Inches): Mayoritas 14-15.6 inci, menunjukkan standar umum.  
+      - RAM: 8GB paling umum, dengan 16GB ke atas lebih banyak ditemukan di laptop kelas atas.  
+      - CPU Frequency: Berkisar 2-3 GHz, cukup untuk komputasi sehari-hari.  
+      - Penyimpanan (SSD/HDD): Sebagian besar laptop memiliki 256GB hingga 512GB penyimpanan utama.  
+      - Harga laptop: Berkisar €600 - €1500, menunjukkan dominasi segmen menengah.
+  
+  3. Boxplot (Outlier Detection):
+     ![Numeric_Features_Histogram](https://github.com/ariesdav/proyek-machine-learning-terapan/blob/15ef885bac0ed5fd580e76d56179a608ef4ca95a/submission1-predictive-analytics/gambar/Univariate_Analysis3.png)
+      - Terdapat outlier pada ukuran layar, bobot, RAM, CPU_freq, storage, dan harga.  
+      - Outlier dihapus menggunakan metode IQR untuk menjaga akurasi analisis.  
 
-  - Fitur dengan kurang dari 10 kategori unik (TypeName, OS, Screen, dll.):  
-    - Notebook menjadi jenis laptop paling umum dibandingkan Ultrabook dan Gaming Laptop.  
-    - Windows 10 adalah sistem operasi dominan, sementara Android hampir tidak digunakan.  
-    - Mayoritas laptop menggunakan layar Full HD (1920x1080).  
-    - SSD lebih banyak digunakan dibandingkan HDD, sementara penyimpanan sekunder jarang ditemukan.  
-
-  - Fitur biner (Ya/Tidak):  
-    - Layar sentuh, IPS Panel, dan Retina Display masih jarang ditemukan, hanya ada pada model premium.  
-
-5. Analisis Fitur Numerik  
-  - Distribusi Histogram:  
-    - Ukuran layar (Inches): Mayoritas 14-15.6 inci, menunjukkan standar umum.  
-    - RAM: 8GB paling umum, dengan 16GB ke atas lebih banyak ditemukan di laptop kelas atas.  
-    - CPU Frequency: Berkisar 2-3 GHz, cukup untuk komputasi sehari-hari.  
-    - Penyimpanan (SSD/HDD): Sebagian besar laptop memiliki 256GB hingga 512GB penyimpanan utama.  
-    - Harga laptop: Berkisar €600 - €1500, menunjukkan dominasi segmen menengah.  
-
-  - Boxplot (Outlier Detection):  
-    - Terdapat outlier pada ukuran layar, bobot, RAM, CPU_freq, storage, dan harga.  
-    - Outlier dihapus menggunakan metode IQR untuk menjaga akurasi analisis.  
+#### 5. Multivariate Analysis
