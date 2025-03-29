@@ -106,3 +106,188 @@ B. **Analisis Fitur Numerik**
       - Outlier dihapus menggunakan metode IQR untuk menjaga akurasi analisis.  
 
 #### 5. Multivariate Analysis
+A. **Analisis Fitur Kategori**
+  1. Fitur dengan lebih dari 10 kategori unik:
+     ![Categories_Features_Up_10](https://github.com/ariesdav/proyek-machine-learning-terapan/blob/5253638de0868b14b5274ac8f6eabb7309850d67/submission1-predictive-analytics/gambar/Multivariate_Analysis.png)
+     - Merek, model, prosesor (CPU), dan kartu grafis (GPU) berpengaruh besar terhadap harga.
+     - Laptop gaming dan merek premium cenderung lebih mahal.
+
+  2. Fitur dengan kurang dari 10 kategori unik:
+     ![Categories_Features_Under_10](https://github.com/ariesdav/proyek-machine-learning-terapan/blob/5253638de0868b14b5274ac8f6eabb7309850d67/submission1-predictive-analytics/gambar/Multivariate_Analysis1.png)
+     - Tipe laptop, sistem operasi, jenis layar, dan spesifikasi hardware utama memengaruhi harga.
+     - Workstation, gaming laptop, macOS, layar 4K, SSD, dan GPU Nvidia lebih mahal dibanding laptop standar.
+ 
+ 4. Fitur biner (Ya/Tidak):
+    <!--![Categories_Features_Binary]()-->
+    - Layar sentuh, panel IPS, dan Retina Display meningkatkan harga, menunjukkan bahwa kualitas layar berperan penting.
+
+B. Analisis Fitur Numerik
+ 1. Heatmap Korelasi:
+    ![Heatmap_Correlation](https://github.com/ariesdav/proyek-machine-learning-terapan/blob/5253638de0868b14b5274ac8f6eabb7309850d67/submission1-predictive-analytics/gambar/Multivariate_Analysis2.png)
+    - RAM memiliki korelasi tertinggi dengan harga, diikuti oleh resolusi layar, CPU, dan penyimpanan tambahan.
+    - Primary storage (SSD/HDD) memiliki korelasi negatif, artinya kehadiran SSD tidak selalu meningkatkan harga secara signifikan.
+    - Ukuran layar (Inches) memiliki korelasi rendah, sehingga fitur ini dihapus dari analisis lebih lanjut untuk meningkatkan fokus pada variabel yang lebih berpengaruh.
+
+## **Data Preparation**  
+
+Tahap **Data Preparation** merupakan langkah penting dalam proyek ini untuk memastikan bahwa data siap digunakan dalam proses pemodelan. Data preparation dilakukan dengan berbagai teknik, termasuk **penghapusan fitur yang tidak relevan**, **pengelompokan kategori**, **encoding fitur kategori**, **reduksi dimensi dengan PCA**, **pembagian dataset menjadi train dan test**, serta **standarisasi fitur numerik**.  
+
+### **1. Menghapus Fitur yang Tidak Relevan**  
+```python
+df.drop('Product', inplace=True, axis=1)
+```
+Pada tahap awal, fitur **Product** dihapus dari dataset. Hal ini dikarenakan fitur tersebut memiliki **618 kategori unik**, sehingga terlalu granular dan sulit untuk diolah. Jika tetap digunakan, fitur ini bisa menambah kompleksitas model tanpa memberikan informasi yang signifikan.  
+
+### **2. Pengelompokan Fitur dengan Banyak Kategori (CPU_model & GPU_model)**  
+Beberapa fitur dalam dataset memiliki terlalu banyak kategori unik, seperti **CPU_model dan GPU_model**. Jika dibiarkan dalam bentuk aslinya, fitur ini akan menyebabkan model menjadi terlalu kompleks dan bisa meningkatkan risiko overfitting. Oleh karena itu, dilakukan pengelompokan sebagai berikut:  
+
+- **CPU_model** dikelompokkan berdasarkan tingkat performanya:  
+  - **Low**: Intel i3, Ryzen 3  
+  - **Mid**: Intel i5, Ryzen 5  
+  - **High**: Intel i7, i9, Ryzen 7, Ryzen 9  
+
+```python
+def categorize_cpu(cpu):
+    cpu = cpu.lower()
+    if 'i3' in cpu or 'ryzen 3' in cpu:
+        return 'Low'
+    if 'i5' in cpu or 'ryzen 5' in cpu:
+        return 'Mid'
+    if 'i7' in cpu or 'i9' in cpu or 'ryzen 7' in cpu or 'ryzen 9' in cpu:
+        return 'High'
+    return 'Other'
+
+df['CPU_performance'] = df['CPU_model'].apply(categorize_cpu)
+df.drop(columns=['CPU_model'], inplace=True)
+```
+
+Setelah dikategorikan, fitur CPU_model yang asli dihapus, dan kategori baru dikonversi ke variabel **dummy** menggunakan **One-Hot Encoding (OHE)** agar bisa digunakan dalam model.  
+
+- **GPU_model** juga dikelompokkan berdasarkan performa:  
+  - **Integrated**: GPU bawaan Intel/AMD  
+  - **Mid**: MX series, Radeon R, Quadro  
+  - **High**: GTX, RTX, Radeon RX  
+
+```python
+def categorize_gpu(gpu):
+    gpu = gpu.lower()
+    if ('intel' in gpu or 'uhd' in gpu or 'hd' in gpu or 'iris' in gpu or 'integrated' in gpu):
+        return 'Integrated'
+    elif ('gtx' in gpu or 'rtx' in gpu or 'radeon rx' in gpu):
+        return 'High'
+    elif ('mx' in gpu or 'radeon r' in gpu or 'quadro' in gpu):
+        return 'Mid'
+    return 'Other'
+
+df['GPU_performance'] = df['GPU_model'].apply(categorize_gpu)
+df.drop(columns=['GPU_model'], inplace=True)
+```
+
+### **3. Encoding Fitur Kategori**  
+Dataset memiliki beberapa fitur kategori yang perlu dikonversi ke format numerik agar bisa digunakan oleh model. Teknik encoding yang digunakan meliputi **One-Hot Encoding (OHE) dan Label Encoding**.  
+
+#### **One-Hot Encoding (OHE)**  
+```python
+ohe_feat = ['Company', 'TypeName', 'OS', 'CPU_company', 'PrimaryStorageType', 'SecondaryStorageType', 'GPU_company']
+df = pd.get_dummies(df, columns=ohe_feat, drop_first=True, dtype='int')
+```
+Fitur dengan banyak kategori, seperti **Company, TypeName, OS, CPU_company, PrimaryStorageType, SecondaryStorageType, dan GPU_company**, dikonversi menggunakan **One-Hot Encoding**.  
+
+#### **Label Encoding**  
+```python
+binary_cat_col = ["Touchscreen", "IPSpanel", "RetinaDisplay"]
+le = LabelEncoder()
+
+for col in binary_cat_col:
+    df[col] = le.fit_transform(df[col])
+```
+Fitur biner yang hanya memiliki dua kategori (Ya/Tidak), seperti **Touchscreen, IPSpanel, dan RetinaDisplay**, dikonversi menggunakan **Label Encoding** untuk menyederhanakan representasi datanya.  
+
+### **4. Reduksi Dimensi dengan PCA**  
+![PCA](https://github.com/ariesdav/proyek-machine-learning-terapan/blob/5253638de0868b14b5274ac8f6eabb7309850d67/submission1-predictive-analytics/gambar/PCA.png)
+```python
+pca = PCA(n_components=1, random_state=123)
+pca.fit(df[['ScreenW', 'ScreenH']])
+df['ScreenSize'] = pca.transform(df[['ScreenW', 'ScreenH']]).flatten()
+df.drop(['ScreenW', 'ScreenH'], axis=1, inplace=True)
+```
+Beberapa fitur numerik dalam dataset memiliki korelasi tinggi, sehingga bisa menyebabkan **redundansi informasi**. Salah satu contoh adalah fitur **ScreenW dan ScreenH**, yang sama-sama menggambarkan resolusi layar. Untuk mengatasi ini, dilakukan **Principal Component Analysis (PCA)** untuk menggabungkan kedua fitur tersebut menjadi satu fitur baru bernama **ScreenSize**.  
+
+### **5. Membagi Data (Train-Test Split)**  
+```python
+X = df.drop(["Price_euros"], axis=1)
+y = df["Price_euros"]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=123)
+```
+Setelah data dikonversi ke bentuk numerik dan dimensi dikurangi, dataset dibagi menjadi **training set (80%) dan test set (20%)**. Training set digunakan untuk melatih model, sedangkan test set digunakan untuk mengevaluasi performa model.  
+
+### **6. Standarisasi Fitur Numerik**  
+```python
+numerical_features = ['Ram', 'Weight', 'ScreenSize', 'SecondaryStorage']
+scaler = StandardScaler()
+scaler.fit(X_train[numerical_features])
+X_train[numerical_features] = scaler.transform(X_train.loc[:, numerical_features])
+```
+Fitur numerik dalam dataset memiliki skala yang berbeda-beda, misalnya **RAM dalam GB**, **berat dalam kg**, dan **ScreenSize dalam ukuran relatif**. Jika tidak disesuaikan, perbedaan skala ini bisa menyebabkan model lebih berat ke fitur dengan nilai besar. Oleh karena itu, dilakukan **standardisasi** menggunakan **StandardScaler**, yang mengubah semua fitur numerik menjadi skala dengan rata-rata **0** dan standar deviasi **1**.  
+
+## Pengembangan Model
+### 1. Modeling
+Proses ini bertujuan untuk membangun model machine learning yang mampu memprediksi harga dengan tingkat akurasi yang tinggi. Beberapa algoritma yang digunakan dalam proyek ini meliputi:
+
+- **Random Forest Regressor (RF)**: Model ensemble berbasis pohon keputusan yang meningkatkan akurasi dengan menggabungkan banyak pohon dan mengurangi overfitting.
+- **Extra Trees Regressor (ET)**: Mirip dengan RF, tetapi menggunakan lebih banyak elemen acak dalam pemilihan fitur dan pemotongan pohon, yang membuatnya lebih cepat dalam pelatihan.
+- **Gradient Boosting Regressor (GBR)**: Model boosting yang membangun pohon secara bertahap untuk memperbaiki kesalahan dari pohon sebelumnya, sehingga lebih fokus pada prediksi yang sulit.
+
+### 2. Implementasi Model
+Pertama, dibuat sebuah DataFrame kosong untuk menyimpan nilai error dari setiap model.
+```python
+models = pd.DataFrame(index=['train_mse', 'test_mse'], columns=['RF', 'ET', 'GBR'])
+```
+
+#### a. Random Forest Regressor (RF)
+Model RF dilatih menggunakan 50 pohon keputusan (**n_estimators=50**) dengan kedalaman maksimal 15 (**max_depth=15**).
+```python
+rf = RandomForestRegressor(n_estimators=50, max_depth=15, random_state=55, n_jobs=-1)
+```
+**Kelebihan RF:**
+- Mengurangi overfitting dibandingkan model pohon keputusan tunggal.
+- Mampu menangani data dengan banyak fitur.
+
+**Kekurangan RF:**
+- Kurang optimal untuk dataset yang sangat besar karena membutuhkan banyak pohon.
+- Interpretasi model lebih sulit dibandingkan model pohon tunggal.
+
+#### b. Extra Trees Regressor (ET)
+ET dilatih dengan parameter yang sama seperti RF, yaitu 50 pohon dengan kedalaman maksimal 15.
+```python
+et = ExtraTreesRegressor(n_estimators=50, max_depth=15, random_state=55, n_jobs=-1)
+```
+**Kelebihan ET:**
+- Lebih cepat dalam pelatihan dibandingkan RF karena lebih banyak elemen acak.
+- Menghasilkan variasi model yang lebih luas, sehingga lebih tahan terhadap overfitting.
+
+**Kekurangan ET:**
+- Akurasi bisa lebih rendah dibandingkan RF pada dataset dengan pola yang sangat jelas.
+- Lebih sulit untuk dituning dibandingkan model lain.
+
+#### c. Gradient Boosting Regressor (GBR)
+GBR dilatih dengan parameter **n_estimators=50**, **max_depth=15**, dan **learning_rate=0.5**.
+```python
+gbr = GradientBoostingRegressor(n_estimators=50, max_depth=15, learning_rate=0.5, random_state=55)
+```
+**Kelebihan GBR:**
+- Dapat menangani dataset dengan jumlah fitur besar.
+- Lebih akurat dibandingkan RF dan ET jika parameter dioptimalkan dengan baik.
+
+**Kekurangan GBR:**
+- Proses pelatihan lebih lambat dibandingkan RF dan ET.
+- Lebih rentan terhadap overfitting jika parameter tidak dituning dengan benar.
+
+### 3. Pemilihan Model Terbaik3. Pemilihan Model Terbaik
+Meskipun model Gradient Boosting Regressor (GBR) memiliki akurasi yang lebih tinggi pada data training, model ini lebih rentan terhadap overfitting, sehingga kurang andal saat digunakan untuk data baru. Oleh karena itu, model Random Forest Regressor (RF) dipilih sebagai model terbaik karena mampu memberikan prediksi yang lebih stabil dan dapat digeneralisasi dengan baik ke data yang belum pernah dilihat sebelumnya.
+
+Beberapa alasan utama memilih RF sebagai model terbaik:
+- Keseimbangan antara akurasi dan generalisasi: RF mampu memberikan hasil yang cukup akurat tanpa mengalami overfitting yang berlebihan.
+- Robust terhadap variasi data: Dengan teknik bagging, RF dapat menangani berbagai pola data tanpa kehilangan performa secara drastis.
+- Lebih mudah diimplementasikan dan dituning: Dibandingkan GBR yang memerlukan tuning parameter lebih kompleks, RF lebih fleksibel dan tidak terlalu sensitif terhadap perubahan parameter.
+
